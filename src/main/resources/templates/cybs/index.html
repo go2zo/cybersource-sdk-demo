@@ -1,13 +1,51 @@
 {{#partial "content"}}
     <div>
-        <form method="post" action="setup">
-            {{#each data}}
-                <div>
-                    <label for="{{@key}}">{{@key}}</label>
-                    <input type="text" id="{{@key}}" name="{{@key}}" value="{{this}}" />
-                </div>
-            {{/each}}
-            <input id="setup-submit" type="submit" value="Setup" />
+        <form id="pa_req" method="post" target="_blank" action="setup">
+            <div>
+                <label for="pa_req_card_accountNumber">card_accountNumber</label>
+                <input type="text" id="pa_req_card_accountNumber" name="card_accountNumber" value="{{data.card_accountNumber}}" />
+            </div>
+            <div>
+                <label for="pa_req_card_expirationMonth">card_expirationMonth</label>
+                <input type="text" id="pa_req_card_expirationMonth" name="card_expirationMonth" value="{{data.card_expirationMonth}}" />
+            </div>
+            <div>
+                <label for="pa_req_card_expirationYear">card_expirationYear</label>
+                <input type="text" id="pa_req_card_expirationYear" name="card_expirationYear" value="{{data.card_expirationYear}}" />
+            </div>
+            <div>
+                <label for="pa_req_billTo_city">billTo_city</label>
+                <input type="text" id="pa_req_billTo_city" name="billTo_city" value="{{data.billTo_city}}" />
+            </div>
+            <div>
+                <label for="pa_req_billTo_country">billTo_country</label>
+                <input type="text" id="pa_req_billTo_country" name="billTo_country" value="{{data.billTo_country}}" />
+            </div>
+            <div>
+                <label for="pa_req_billTo_email">billTo_email</label>
+                <input type="text" id="pa_req_billTo_email" name="billTo_email" value="{{data.billTo_email}}" />
+            </div>
+            <div>
+                <label for="pa_req_billTo_firstName">billTo_firstName</label>
+                <input type="text" id="pa_req_billTo_firstName" name="billTo_firstName" value="{{data.billTo_firstName}}" />
+            </div>
+            <div>
+                <label for="pa_req_billTo_lastName">billTo_lastName</label>
+                <input type="text" id="pa_req_billTo_lastName" name="billTo_lastName" value="{{data.billTo_lastName}}" />
+            </div>
+            <div>
+                <label for="pa_req_billTo_postalCode">billTo_postalCode</label>
+                <input type="text" id="pa_req_billTo_postalCode" name="billTo_postalCode" value="{{data.billTo_postalCode}}" />
+            </div>
+            <div>
+                <label for="pa_req_billTo_state">billTo_state</label>
+                <input type="text" id="pa_req_billTo_state" name="billTo_state" value="{{data.billTo_state}}" />
+            </div>
+            <div>
+                <label for="pa_req_billTo_street1">billTo_street1</label>
+                <input type="text" id="pa_req_billTo_street1" name="billTo_street1" value="{{data.billTo_street1}}" />
+            </div>
+            <input id="pa_req_submit" type="submit" value="Payment" />
         </form>
     </div>
 {{/partial}}
