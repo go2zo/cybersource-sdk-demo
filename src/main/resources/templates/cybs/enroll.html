@@ -1,0 +1,43 @@
+{{#partial "content"}}
+<table>
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each data}}
+        <tr>
+            <td>{{@key}}</td>
+            <td>{{this}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+{{/partial}}
+
+{{#partial "scripts"}}
+<script>
+    window.onload = function () {
+        const cardinalCollectionForm = document.querySelector('#cardinal_collection_form');
+        if (cardinalCollectionForm) {
+            cardinalCollectionForm.submit();
+        }
+    }
+
+    window.addEventListener('message', function (event) {
+        if (event.origin === 'https://centinelapistag.cardinalcommerce.com') {
+            let setupReply = JSON.stringify(event.data);
+            if (setupReply.Status) {
+
+            }
+            console.log(event.data);
+            let cardinalCollectionResponseTextarea = document.querySelector('#cardinal_collection_response_textarea');
+            cardinalCollectionResponseTextarea.value = event.data;
+        }
+    }, false);
+</script>
+{{/partial}}
+
+{{> layout/base}}

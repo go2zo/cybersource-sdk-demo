@@ -1,0 +1,67 @@
+{{#partial "content"}}
+<div>
+    <form id="enroll_from" method="post" action="enroll">
+        <table>
+            <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each data}}
+                <tr>
+                    <td>{{@key}}</td>
+                    <td>{{this}}</td>
+                </tr>
+                <input type="hidden" name="{{@key}}" value="{{this}}" />
+            {{/each}}
+            {{#each order}}
+                <tr>
+                    <td>{{@key}}</td>
+                    <td>{{this}}</td>
+                </tr>
+                <input type="hidden" name="{{@key}}" value="{{this}}" />
+            {{/each}}
+            </tbody>
+        </table>
+        <input type="hidden" name="payerAuthEnrollService_referenceID" value="{{data.payerAuthSetupReply_referenceID}}" />
+        <input type="submit" value="Enroll" />
+    </form>
+</div>
+<div>
+    <iframe id="cardinal_collection_iframe" name="collectionIframe" height="1" width="1" style="display: none;"></iframe>
+    <form id="cardinal_collection_form" method="post" target="collectionIframe" action="{{data.payerAuthSetupReply_deviceDataCollectionURL}}">
+        <input id="cardinal_collection_form_input" type="hidden" name="JWT" value="{{data.payerAuthSetupReply_accessToken}}" />
+    </form>
+</div>
+<div>
+    <label for="setup_reply">Device Data Collection Reply: </label>
+    <span id="setup_reply"></span>
+</div>
+{{/partial}}
+
+{{#partial "scripts"}}
+<script>
+    window.onload = function () {
+        const cardinalCollectionForm = document.querySelector('#cardinal_collection_form');
+        if (cardinalCollectionForm) {
+            cardinalCollectionForm.submit();
+        }
+    }
+
+    window.addEventListener('message', function (event) {
+        if (event.origin === 'https://centinelapistag.cardinalcommerce.com') {
+            let setupReply = JSON.stringify(event.data);
+            const element = document.querySelector('#setup_reply');
+            if (element) {
+                element.textContent = event.data;
+            }
+            if (setupReply.Status) {
+            }
+        }
+    }, false);
+</script>
+{{/partial}}
+
+{{> layout/base}}

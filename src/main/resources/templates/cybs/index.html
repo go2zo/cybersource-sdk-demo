@@ -1,0 +1,15 @@
+{{#partial "content"}}
+    <div>
+        <form method="post" action="setup">
+            {{#each data}}
+                <div>
+                    <label for="{{@key}}">{{@key}}</label>
+                    <input type="text" id="{{@key}}" name="{{@key}}" value="{{this}}" />
+                </div>
+            {{/each}}
+            <input id="setup-submit" type="submit" value="Setup" />
+        </form>
+    </div>
+{{/partial}}
+
+{{> layout/base}}
