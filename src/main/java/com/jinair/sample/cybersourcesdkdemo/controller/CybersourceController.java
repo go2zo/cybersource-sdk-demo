@@ -3,12 +3,11 @@ package com.jinair.sample.cybersourcesdkdemo.controller;
 import com.jinair.sample.cybersourcesdkdemo.service.CybersourceService;
 import com.jinair.sample.cybersourcesdkdemo.service.CybersourceServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Properties;
@@ -21,22 +20,21 @@ import java.util.Properties;
  * Description:
  */
 @RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
+@Slf4j
 public class CybersourceController {
 
     private final Properties cybsProps;
 
     private final CybersourceService service;
 
-    @GetMapping("/setup")
-    public ResponseEntity<Map> setup() {
-        Map<String, String> reply = service.setup(cybsProps, "classpath:setup.properties");
+    @PostMapping("/setup")
+    public ResponseEntity<Map> setup(@RequestBody Map<String, String> parameters) {
+        Map<String, String> reply = service.setup(cybsProps, parameters);
+        log.debug("Request => " + parameters.toString());
+        log.debug("Reply => " + reply.toString());
         return ResponseEntity.ok(reply);
     }
 
-    @GetMapping("/auth")
-    public ResponseEntity<Map> auth() {
-        Map<String, String> reply = service.auth(cybsProps, "classpath:auth.properties");
-        return ResponseEntity.ok(reply);
-    }
 }

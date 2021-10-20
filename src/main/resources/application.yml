@@ -1,2 +1,11 @@
-handlebars.enabled: true
-handlebars.suffix: .html
+handlebars:
+  enabled: true
+  suffix: .html
+
+spring.jackson.serialization.indent_output: true
+
+## log settings
+logging:
+  file.path: ./logs/${spring.profiles.active:local}/
+  level:
+    com.jinair.sample: debug

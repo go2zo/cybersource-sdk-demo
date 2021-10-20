@@ -1,53 +1,112 @@
 {{#partial "content"}}
-    <div>
-        <form id="pa_req" method="post" target="_blank" action="setup">
-            <div>
-                <label for="pa_req_card_accountNumber">card_accountNumber</label>
-                <input type="text" id="pa_req_card_accountNumber" name="card_accountNumber" value="{{data.card_accountNumber}}" />
-            </div>
-            <div>
-                <label for="pa_req_card_expirationMonth">card_expirationMonth</label>
-                <input type="text" id="pa_req_card_expirationMonth" name="card_expirationMonth" value="{{data.card_expirationMonth}}" />
-            </div>
-            <div>
-                <label for="pa_req_card_expirationYear">card_expirationYear</label>
-                <input type="text" id="pa_req_card_expirationYear" name="card_expirationYear" value="{{data.card_expirationYear}}" />
-            </div>
-            <div>
-                <label for="pa_req_billTo_city">billTo_city</label>
-                <input type="text" id="pa_req_billTo_city" name="billTo_city" value="{{data.billTo_city}}" />
-            </div>
-            <div>
-                <label for="pa_req_billTo_country">billTo_country</label>
-                <input type="text" id="pa_req_billTo_country" name="billTo_country" value="{{data.billTo_country}}" />
-            </div>
-            <div>
-                <label for="pa_req_billTo_email">billTo_email</label>
-                <input type="text" id="pa_req_billTo_email" name="billTo_email" value="{{data.billTo_email}}" />
-            </div>
-            <div>
-                <label for="pa_req_billTo_firstName">billTo_firstName</label>
-                <input type="text" id="pa_req_billTo_firstName" name="billTo_firstName" value="{{data.billTo_firstName}}" />
-            </div>
-            <div>
-                <label for="pa_req_billTo_lastName">billTo_lastName</label>
-                <input type="text" id="pa_req_billTo_lastName" name="billTo_lastName" value="{{data.billTo_lastName}}" />
-            </div>
-            <div>
-                <label for="pa_req_billTo_postalCode">billTo_postalCode</label>
-                <input type="text" id="pa_req_billTo_postalCode" name="billTo_postalCode" value="{{data.billTo_postalCode}}" />
-            </div>
-            <div>
-                <label for="pa_req_billTo_state">billTo_state</label>
-                <input type="text" id="pa_req_billTo_state" name="billTo_state" value="{{data.billTo_state}}" />
-            </div>
-            <div>
-                <label for="pa_req_billTo_street1">billTo_street1</label>
-                <input type="text" id="pa_req_billTo_street1" name="billTo_street1" value="{{data.billTo_street1}}" />
-            </div>
-            <input id="pa_req_submit" type="submit" value="Payment" />
-        </form>
-    </div>
+<div>
+    <form id="pa_req" method="post" action="/cybs/enroll">
+        <div>
+            <label for="pa_req_card_accountNumber">card_accountNumber</label>
+            <input type="text" id="pa_req_card_accountNumber" name="card_accountNumber" value="{{data.card_accountNumber}}" />
+        </div>
+        <div>
+            <label for="pa_req_card_expirationMonth">card_expirationMonth</label>
+            <input type="text" id="pa_req_card_expirationMonth" name="card_expirationMonth" value="{{data.card_expirationMonth}}" />
+        </div>
+        <div>
+            <label for="pa_req_card_expirationYear">card_expirationYear</label>
+            <input type="text" id="pa_req_card_expirationYear" name="card_expirationYear" value="{{data.card_expirationYear}}" />
+            <button type="button" id="check_card_info" onclick="payerAuthSetupService()">check</button>
+        </div>
+        <div>
+            <label for="pa_req_billTo_city">billTo_city</label>
+            <input type="text" id="pa_req_billTo_city" name="billTo_city" value="{{data.billTo_city}}" />
+        </div>
+        <div>
+            <label for="pa_req_billTo_country">billTo_country</label>
+            <input type="text" id="pa_req_billTo_country" name="billTo_country" value="{{data.billTo_country}}" />
+        </div>
+        <div>
+            <label for="pa_req_billTo_email">billTo_email</label>
+            <input type="text" id="pa_req_billTo_email" name="billTo_email" value="{{data.billTo_email}}" />
+        </div>
+        <div>
+            <label for="pa_req_billTo_firstName">billTo_firstName</label>
+            <input type="text" id="pa_req_billTo_firstName" name="billTo_firstName" value="{{data.billTo_firstName}}" />
+        </div>
+        <div>
+            <label for="pa_req_billTo_lastName">billTo_lastName</label>
+            <input type="text" id="pa_req_billTo_lastName" name="billTo_lastName" value="{{data.billTo_lastName}}" />
+        </div>
+        <div>
+            <label for="pa_req_billTo_postalCode">billTo_postalCode</label>
+            <input type="text" id="pa_req_billTo_postalCode" name="billTo_postalCode" value="{{data.billTo_postalCode}}" />
+        </div>
+        <div>
+            <label for="pa_req_billTo_state">billTo_state</label>
+            <input type="text" id="pa_req_billTo_state" name="billTo_state" value="{{data.billTo_state}}" />
+        </div>
+        <div>
+            <label for="pa_req_billTo_street1">billTo_street1</label>
+            <input type="text" id="pa_req_billTo_street1" name="billTo_street1" value="{{data.billTo_street1}}" />
+        </div>
+        <div>
+            <label for="pa_req_purchaseTotals_currency">purchaseTotals_currency</label>
+            <input type="text" id="pa_req_purchaseTotals_currency" name="purchaseTotals_currency" value="{{data.purchaseTotals_currency}}" />
+        </div>
+        <div>
+            <label for="pa_req_item_0_unitPrice">item_0_unitPrice</label>
+            <input type="text" id="pa_req_item_0_unitPrice" name="item_0_unitPrice" value="{{data.item_0_unitPrice}}" />
+        </div>
+        <input id="pa_req_merchantReferenceCode" type="hidden" name="merchantReferenceCode" value="{{data.merchantReferenceCode}}" />
+        <input id="pa_req_referenceId" type="hidden" name="payerAuthEnrollService_referenceID" />
+        <input id="pa_req_submit" type="submit" value="Payment" />
+    </form>
+    <iframe id="cardinal_collection_iframe" name="collectionIframe" height="1" width="1" style="display: none;"></iframe>
+    <form id="cardinal_collection_form" method="post" target="collectionIframe">
+        <input id="cardinal_collection_form_input" type="hidden" name="JWT" />
+    </form>
+</div>
+{{/partial}}
+
+{{#partial "scripts"}}
+<script>
+  function payerAuthSetupService () {
+    let xhr = new XMLHttpRequest();
+    let data = {
+      'merchantReferenceCode': document.querySelector('#pa_req_merchantReferenceCode').value,
+      'card_accountNumber': document.querySelector('#pa_req_card_accountNumber').value,
+      'card_expirationMonth': document.querySelector('#pa_req_card_expirationMonth').value,
+      'card_expirationYear': document.querySelector('#pa_req_card_expirationYear').value
+    }
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === xhr.DONE) {
+        if (xhr.status === 200 || xhr.status === 201) {
+          let res = JSON.parse(xhr.responseText);
+          let text = document.createTextNode('Checked!!')
+          let checkButton = document.querySelector('#check_card_info')
+          checkButton.parentNode.insertBefore(text, checkButton.nextSibling)
+          document.querySelector('#cardinal_collection_form').action = res['payerAuthSetupReply_deviceDataCollectionURL']
+          document.querySelector('#cardinal_collection_form_input').value = res['payerAuthSetupReply_accessToken']
+          document.querySelector('#pa_req_referenceId').value = res['payerAuthSetupReply_referenceID']
+          document.querySelector('#cardinal_collection_form').submit()
+        }
+      }
+    }
+    xhr.open('POST', '/api/setup')
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.send(JSON.stringify(data));
+  }
+
+  window.addEventListener('message', function (event) {
+    if (event.origin === 'https://centinelapistag.cardinalcommerce.com/') {
+      let setupReply = JSON.stringify(event.data);
+      const element = document.querySelector('#setup_reply');
+      if (element) {
+        element.textContent = event.data;
+      }
+      if (setupReply.Status) {
+        console.log(setupReply.Status)
+      }
+    }
+  }, false);
+</script>
 {{/partial}}
 
 {{> layout/base}}
